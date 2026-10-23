@@ -16,6 +16,7 @@ if (process.env.REDIS_URL) {
 const store = {
   get: async (d) => (redis ? redis.hGet(KEY, d) : mem.get(d)) ?? null,
   set: async (d, v) => (redis ? redis.hSet(KEY, d, v) : mem.set(d, v)),
+  del: async (d) => (redis ? redis.hDel(KEY, d) : mem.delete(d)),
   all: async () => (redis ? redis.hGetAll(KEY) : Object.fromEntries(mem)),
 };
 
@@ -28,7 +29,10 @@ function parts(v) {
   if (Array.isArray(v)) return v.flatMap(parts);
   if (typeof v === "number") return Number.isFinite(v) ? [v] : [];
   return String(v).split(/[\n\r;]+/).map((s) => s.trim()).filter(Boolean)
-    .map((s) => Number(s.replace(/,(?=\d{3}\b)/g, "").replace(",", ".").replace(/[^0-9.+-eE]/g, "")))
+    .map((s) => {
+      const m = /[-+]?\d+(?:[.,]\d+)?/.exec(s.replace(/(\d),(?=\d{3}(?!\d))/g, "$1"));
+      return m ? Number(m[0].replace(",", ".")) : NaN;
+    })
     .filter(Number.isFinite);
 }
 function toNum(k, v) {
@@ -82,7 +86,7 @@ function send(res, code, obj) {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type, X-Ingest-Token",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
     "Cache-Control": "no-store",
   });
   res.end(JSON.stringify(obj));
@@ -108,6 +112,13 @@ http.createServer(async (req, res) => {
       const merged = { ...prev, ...rec, updated_at: new Date().toISOString() };
       await store.set(rec.date, JSON.stringify(merged));
       return send(res, 200, { ok: true, record: merged });
+    }
+    if (url.pathname === "/api/health/data" && req.method === "DELETE") {
+      if (!authed(req)) return send(res, 401, { error: "unauthorized" });
+      const d = toDate(url.searchParams.get("date"));
+      if (!url.searchParams.get("date") || !d) return send(res, 400, { error: "date required" });
+      await store.del(d);
+      return send(res, 200, { ok: true, deleted: d });
     }
     if (url.pathname === "/api/health/data" && req.method === "GET") {
       if (!authed(req)) return send(res, 401, { error: "unauthorized" });
