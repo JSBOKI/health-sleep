@@ -1,0 +1,8 @@
+{
+  "name": "health-sleep-api",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "redis": "^4.7.0" }
+}

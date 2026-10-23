@@ -50,3 +50,18 @@ This repo includes `render.yaml` for a static site.
 In the Render dashboard you can also create a **Static Site** by hand with that build command and publish directory. Routes rewrite to `index.html` so a refresh still loads the app. Navigation itself uses the URL hash (`#/sleep`), which works even without the rewrite.
 
 Do not add a server, a database, or an analytics snippet. The publish output is only HTML, CSS, JS, and icons.
+
+## iPhone sync API (`api/`)
+
+A tiny Node web service (`health-sleep-api` on Render, free plan) receives daily
+Apple Health summaries from an Apple Shortcuts automation and stores them in a
+Render Key Value (Redis) hash `health:daily`, keyed by date (upsert/merge).
+
+- `POST /api/health/ingest` — header `X-Ingest-Token`, JSON body, all fields optional:
+  `date, steps, active_energy, resting_hr, avg_hr, hrv, sleep_hours, sleep_start, sleep_end, weight, vo2max, workouts[]`.
+  Strings like `"1,234"`, `"62 bpm"`, and newline-separated lists are accepted
+  (steps/active_energy/sleep_hours lists are summed, others averaged). `date` defaults to today (JST).
+- `GET /api/health/data[?from=YYYY-MM-DD&to=YYYY-MM-DD]` — same header.
+- Env: `INGEST_TOKEN`, `REDIS_URL`.
+
+The dashboard's **Synced** tab (`#/synced`) reads this API.
