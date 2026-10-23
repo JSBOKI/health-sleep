@@ -61,6 +61,7 @@ Render Key Value (Redis) hash `health:daily`, keyed by date (upsert/merge).
   `date, steps, active_energy, resting_hr, avg_hr, hrv, sleep_hours, sleep_start, sleep_end, weight, vo2max, workouts[]`.
   Strings like `"1,234"`, `"62 bpm"`, and newline-separated lists are accepted
   (steps/active_energy/sleep_hours lists are summed, others averaged). `date` defaults to today (JST).
+- `DELETE /api/health/data?date=YYYY-MM-DD` — same header; removes one day.
 - `GET /api/health/data[?from=YYYY-MM-DD&to=YYYY-MM-DD]` — same header.
 - Env: `INGEST_TOKEN`, `REDIS_URL`.
 
