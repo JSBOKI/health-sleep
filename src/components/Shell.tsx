@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Database, LayoutGrid, Moon, Smartphone, TrendingUp } from "lucide-react";
+import { Database, HeartPulse, LayoutGrid, Moon, Smartphone, TrendingUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useHealth } from "@/context/HealthContext";
 import { formatTokyoStamp } from "@/lib/dates";
@@ -10,12 +10,14 @@ export type AppRoute =
   | { name: "sleep" }
   | { name: "trends" }
   | { name: "data" }
+  | { name: "heart" }
   | { name: "synced" };
 
 const NAV = [
   { href: "#/", label: "Overview", icon: LayoutGrid, match: (route: AppRoute) => route.name === "overview" || route.name === "metric" },
   { href: "#/sleep", label: "Sleep", icon: Moon, match: (route: AppRoute) => route.name === "sleep" },
   { href: "#/trends", label: "Trends", icon: TrendingUp, match: (route: AppRoute) => route.name === "trends" },
+  { href: "#/heart", label: "Heart", icon: HeartPulse, match: (route: AppRoute) => route.name === "heart" },
   { href: "#/synced", label: "Synced", icon: Smartphone, match: (route: AppRoute) => route.name === "synced" },
   { href: "#/data", label: "Data", icon: Database, match: (route: AppRoute) => route.name === "data" },
 ];
@@ -66,7 +68,7 @@ export function Shell({ route, children }: { route: AppRoute; children: ReactNod
       </header>
       <main className="mx-auto w-full max-w-5xl px-4 pt-4 pb-[calc(6.5rem+env(safe-area-inset-bottom))]">{children}</main>
       <nav className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)]">
-        <ul className="mx-auto grid max-w-5xl grid-cols-5">
+        <ul className="mx-auto grid max-w-5xl grid-cols-6">
           {NAV.map((item) => {
             const active = item.match(route);
             const Icon = item.icon;

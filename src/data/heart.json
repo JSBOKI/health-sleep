@@ -1,0 +1,61 @@
+{
+  "facility": "Makiminato Chuo Hospital (牧港中央病院), Okinawa",
+  "cardiologist": "Dr. 比嘉 聡 (Higa Satoshi)",
+  "echo": [
+    {
+      "date": "2026-02-05", "age": 53, "quality": "Normal",
+      "summary": "Mildly dilated aortic root (sinus 38 mm, ref 25–35); otherwise normal study.",
+      "values": [
+        {"group":"Aorta","name":"Ao sinus / root","value":38,"unit":"mm","low":25,"high":35},
+        {"group":"Aorta","name":"Sinotubular junction","value":29,"unit":"mm"},
+        {"group":"Aorta","name":"Ascending Ao","value":35,"unit":"mm"},
+        {"group":"Valves","name":"AV annulus diameter","value":25,"unit":"mm"},
+        {"group":"LA","name":"LA dimension","value":38,"unit":"mm","low":20,"high":40},
+        {"group":"LA","name":"LAVI","value":23,"unit":"mL/m²","high":34},
+        {"group":"LV","name":"LVDd","value":4.82,"unit":"cm","low":4.0,"high":5.5},
+        {"group":"LV","name":"LVDs","value":3.06,"unit":"cm","low":3.0,"high":4.5},
+        {"group":"LV","name":"IVS","value":11,"unit":"mm","low":7,"high":11},
+        {"group":"LV","name":"LVPW","value":11,"unit":"mm","low":7,"high":11},
+        {"group":"LV","name":"EF (Teichholz)","value":66,"unit":"%"},
+        {"group":"LV","name":"EF (Simpson)","value":60,"unit":"%"},
+        {"group":"LV","name":"SV index","value":37,"unit":"mL/m²"},
+        {"group":"Diastolic","name":"E / A","value":2.17,"unit":"","note":"E 0.80 / A 0.37 m/s"},
+        {"group":"Diastolic","name":"E/e′ (average)","value":7.7,"unit":"","high":14},
+        {"group":"Diastolic","name":"e′ septal","value":7.4,"unit":"cm/s"},
+        {"group":"Diastolic","name":"e′ lateral","value":9.9,"unit":"cm/s"},
+        {"group":"AV Doppler","name":"AV peak velocity","value":1.14,"unit":"m/s"},
+        {"group":"AV Doppler","name":"AV max PG","value":5.2,"unit":"mmHg"},
+        {"group":"IVC","name":"IVC exp / insp","value":"23 / 7","unit":"mm","note":"Respiratory variation +"}
+      ],
+      "findings": ["AV/MV/TV structurally intact","LV: no dilatation, normal systolic function, no regional asynergy","LA: no dilatation, no thrombus","Color Doppler: AR none, MR trace, TR none, PR trace","Pericardial effusion: trivial"],
+      "plain": "Heart muscle, pumping and valves are normal. The aortic root is a little wider than the reference range, which is the reason for a repeat echo."
+    }
+  ],
+  "holter": [
+    {
+      "start": "2026-09-24 11:30", "end": "2026-09-28 04:29",
+      "recorded": "88 h 59 min 20 s", "analysed": "55 h 33 min 24 s", "noisePct": 37,
+      "hr": {"max":137,"maxAt":"09-25 05:05","mean":62,"min":47,"minAt":"09-26 06:10"},
+      "totalBeats": 202120, "pauses2s": 0, "longestRR": "1.6 s (09-25 21:24)",
+      "pvc": {"total":1,"couplets":0,"runs":0,"burden":"0.00%","note":"No bigeminy / R-on-T"},
+      "pac": {"total":4,"runs":0,"burden":"0.00%"},
+      "af": {"beats":0,"burden":"0.00%"},
+      "handwritten": "‘Orthostatic hypotension’ and ‘Tilt training’ with a small sketch and ‘30–40 cm’ — handwritten note, interpretation uncertain.",
+      "plain": "No pauses, no AF, essentially no ectopy. 37% noise means only ~55 h of the ~89 h recording was analysable."
+    }
+  ],
+  "ecg": [
+    {
+      "date": "2026-10-22 11:17", "device": "Fukuda Denshi", "hr": 53,
+      "machineRead": "None printed on tracing",
+      "read": "Regular rhythm ~53 bpm (sinus bradycardia range), narrow QRS, normal axis, upright T waves, early-repolarisation-type J-point elevation V2–V4.",
+      "caveat": "AI read of photo — confirm with cardiologist. Not a formal interpretation."
+    }
+  ],
+  "upcoming": [
+    {"date":"2027-05-12","time":"10:00","title":"Echocardiogram","notes":"Arrive 10 min early; 20–30 min."},
+    {"date":"2027-05-12","time":"10:30","title":"1-week Holter ECG (Heart Note) attach","notes":"Electrodes water-resistant; avoid electric blankets."},
+    {"date":"2027-06-17","time":"08:30","title":"Cardiology visit — Dr. 比嘉 聡 + ECG","notes":"Arrive 08:30 (ECG time not set). Bring appointment slip, insurance card, medication notebook."}
+  ],
+  "phones": {"physiologyLab":"098-877-0575","reservations":"098-877-0025"}
+}

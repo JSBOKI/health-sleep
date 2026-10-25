@@ -3,6 +3,7 @@ import { Shell, type AppRoute } from "@/components/Shell";
 import { HealthProvider } from "@/context/HealthContext";
 import { METRICS } from "@/lib/metrics";
 import type { MetricId } from "@/lib/types";
+import { HeartPage } from "@/pages/HeartPage";
 import { DataPage } from "@/pages/DataPage";
 import { MetricDetail } from "@/pages/MetricDetail";
 import { Overview } from "@/pages/Overview";
@@ -17,6 +18,7 @@ function parseHash(): AppRoute {
   if (hash.startsWith("/sleep")) return { name: "sleep" };
   if (hash.startsWith("/trends")) return { name: "trends" };
   if (hash.startsWith("/data")) return { name: "data" };
+  if (hash.startsWith("/heart")) return { name: "heart" };
   if (hash.startsWith("/synced")) return { name: "synced" };
   return { name: "overview" };
 }
@@ -26,6 +28,7 @@ function titleFor(route: AppRoute): string {
   if (route.name === "sleep") return "Sleep · Health & Sleep";
   if (route.name === "trends") return "Trends · Health & Sleep";
   if (route.name === "data") return "Data · Health & Sleep";
+  if (route.name === "heart") return "Heart · Health & Sleep";
   if (route.name === "synced") return "iPhone sync · Health & Sleep";
   return "Health & Sleep";
 }
@@ -46,6 +49,7 @@ function Router() {
   else if (route.name === "sleep") page = <SleepPage />;
   else if (route.name === "trends") page = <TrendsPage />;
   else if (route.name === "data") page = <DataPage />;
+  else if (route.name === "heart") page = <HeartPage />;
   else if (route.name === "synced") page = <SyncedPage />;
 
   return <Shell route={route}>{page}</Shell>;
